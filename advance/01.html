@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>第一个vue</title>
+	<script type="text/javascript" src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+</head>
+<body>
+
+	 <div id="app">
+    <input  @keyup="calculate"
+            type="text" 
+            v-model="augend">
+    <span>+</span>
+    <input  @keyup="calculate" 
+            type="text" 
+            v-model="addend">
+    <span>=</span>
+    <input  type="text" 
+            :value="sum">
+    <br>
+    <br>
+    <button @click="reset">
+    清空数据
+    </button>
+ </div>
+
+ <script type="text/javascript">
+
+    const app = new Vue({
+     el:"#app",
+     data:{
+         augend:'',
+         addend:'',
+         sum:''
+     },
+     methods:{
+         calculate(){
+             this.sum = Number(this.augend) 
+                      +
+                       Number(this.addend);
+         },
+         reset(){
+         	 this.$emit('reset');
+            this.sum = this.augend 
+                     = this.addend = '';
+         }
+        }
+    });
+ </script>
+
+
+</body>
+</html>

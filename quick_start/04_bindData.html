@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>数据绑定</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	默认的：{{name}}
+	<p v-html="strongName"></p>
+	<br>
+	属性绑定：<a :href="link">百度</a>
+	<br>
+	括号内运算：{{number+3}}
+	<br>
+三目运算：
+{{ok ? 'yes' : 'no'}}
+
+<script type="text/javascript">
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			name:"哈哈，第一个VUE",
+			strongName:"<strong>渲染加粗</strong>",
+			number:3,
+			link:"http://www.baidu.com",
+			ok:false
+		}
+	});
+
+</script>
+</body>
+</html>
+

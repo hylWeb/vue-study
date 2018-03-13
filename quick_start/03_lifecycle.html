@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>生命周期</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app" ref="app">
+	{{name}}
+</div>
+
+<script type="text/javascript">
+
+	let vm = new Vue({
+		el:"#app",
+		
+		data:{
+			name:"哈哈，第一个VUE",
+			number:""
+		},
+
+
+//八个生命周期：
+		beforeCreate(){
+         console.log('即将创建');
+         console.log(this.$data);
+         console.log(this.$el);
+      },
+
+       created(){
+  	 	 console.log('创建完毕');
+   		 console.log(this.$data);
+   		 console.log(this.$el);
+	 },
+	 beforeMount(){
+    	console.log('即将挂载');
+    	console.log(this.$el);
+ 	},
+	 mounted(){
+	    console.log('挂载完毕');
+	    console.log(this.$el);
+	 },
+	 beforeUpdate(){
+	  console.log('=即将更新渲染=');
+	  let name = this.$refs.app.innerHTML;
+	  console.log('name:'+name);
+	 },
+	updated(){
+	  console.log('==更新成功==');
+	  let name = this.$refs.app.innerHTML;
+	  console.log('name:'+name);
+	 },
+	beforeDestroy(){
+   	console.log('销毁之前');
+ 	},
+	 destroyed(){
+	   console.log('销毁成功');
+	 }
+		
+	});
+ 
+
+ //销毁的测试，在控制台执行vm.destroy(),无法渲染。
+</script>
+</body>
+</html>
+
+

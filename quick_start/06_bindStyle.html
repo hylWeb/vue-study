@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>绑定样式</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	<span :class=[colorClass,activeClass]>哈哈哈</span>
+	<span :style="{color:colorStyle}">内敛变红</span>
+</div>
+<script type="text/javascript">
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			name:"哈哈，第一个VUE",
+			colorStyle:"red",
+			colorClass:"ccc",
+			activeClass:"dddd"
+		}
+	});
+
+</script>
+</body>
+</html>
+

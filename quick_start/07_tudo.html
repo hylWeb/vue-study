@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>todu小案例</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="tudo.css">
+</head>
+<body>
+<div id="app">
+	<input type="text" name="" class="edit" v-model="task.content" placeholder="编写任务"  @keydown.enter="addTask" />
+ 	<div class="list">
+ 		<div class="unit" v-for = "(item,index) in list">
+ 			 <input type="checkbox" @click="changeState(index)" :checked="item.finished">
+       		 <span :class="{'finish':item.finished}">{{item.content}}</span>
+       		 <button @click="removeTask(index)"  class="del">  删除 </button>
+ 		</div>
+ 		 <span v-if = "list.length == 0" class="empty" >暂无任务</span>
+ 	</div>
+
+</div>
+<script type="text/javascript">
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			   task:{
+			       content:'',//内容为空
+			       finished:false,//未完成
+			       deleted:false//未删除
+   			 	},
+   			 	list:[]
+		
+		},
+		methods:{
+			addTask(){
+				this.list.push(this.task);
+				//初始化
+				this.task = {
+					content:'',//内容为空
+			        finished:false,//未完成
+			        deleted:false//未删除
+				}
+			},
+			changeState(index){
+				let curState = this.list[index].finished;
+				this.list[index].finished = !curState;
+			},
+			removeTask(index){
+				 this.list.splice(index,1);
+			}
+
+
+		}
+	});
+
+	Vue.config.devtools = true;
+
+</script>
+</body>
+</html>

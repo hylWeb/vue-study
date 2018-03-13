@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vuex</title>
+ 	<script type="text/javascript" src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+ 	<!--  <script type="text/javascript" src="https://unpkg.com/vue-router@2.5.3/dist/vue-router.js"></script> -->
+ 	<script type="text/javascript" src="../vuex.min.js"></script>
+ 	<style type="text/css">
+ 		.list div{
+ 			background: yellow;
+ 		}
+ 	</style>
+
+<body>
+ <div id="app" class="app">
+	<div class="result">{{result}}</div>
+	    <div class="enter">{{enter == "" ? 0 : enter}}</div>
+	    <div class="keys">
+        <div class="list">
+           <keyboard v-for="item in keys" :value="item"> </keyboard>
+
+        </div>
+    </div>
+ </div>
+
+ <script type="text/javascript">
+ 	//创建仓库
+	const store = new Vuex.Store({
+
+		state:{
+			result:"",
+			enter:""
+		},
+		mutations:{
+			calculate(state,value){
+				if (value === "=") {
+					state.result = eval(state.enter);
+					state.event += value;
+				}else if(value === "clear"){
+					state.result = state.enter = "";
+				}else{
+					state.enter += value;
+				}
+			}
+		}
+	});
+
+	//定义组件
+	Vue.component("keyboard",{
+		props:["value"],
+		template:`<div 
+					@click="getKeyBoardValue"
+					:data-value="value">
+					{{value}}
+				  </div>`,
+		methods:{
+			getKeyBoardValue(event){
+
+				 let value=event.target.dataset.value;
+      				 //通过commit提交mutation
+   			    this.$store.commit('calculate',value)
+
+			}
+		}
+
+	});
+
+   const app = new Vue({
+    el:"#app",
+    store,
+    data:{
+    	    keys:[
+            'clear', '+', '-', '*',
+            '7', '8', '9', '/',
+            '4', '5', '6', '0',
+            '1', '2', '3', '=',
+        ]
+    },
+    computed:{
+    	result(){
+    		return this.$store.state.result;
+    	},
+    	enter(){
+    		return this.$store.state.enter;
+    	}
+
+    }
+
+
+
+  });
+
+(function(){
+    var x = y = 1;
+})();
+console.log(y);
+console.log(x);
+
+
+
+ </script>
+
+
+</body>
+</html>

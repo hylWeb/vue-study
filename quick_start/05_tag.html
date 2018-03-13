@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue的指令</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	<p v-show="show1">显示show</p>
+	<p v-show="show2">隐藏show</p>
+
+	<p v-if="if1">显示if</p>
+	<p v-if="if2">隐藏if</p>
+
+	<p v-if="ifelse">显示if</p>
+	<p v-else="else1">显示else</p>
+
+	<div v-for="(item,index) in list">{{index}}:{{item}}</div>
+
+	<button v-on:click="say('world')">点击</button>
+	<br>
+	输入<input type="text" name="" v-model="msg" />
+	<p>{{msg}}</p>
+	<p v-once>{{msg}}</p>
+</div>
+<script type="text/javascript">
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			show1:true,
+			show2:false,
+			if1:true,
+			if2:false,
+			ifelse:false,
+			list:['及阿娇','dsd','的可视角度'],
+			msg:"第一次渲染"
+			
+		},
+		methods:{
+			say(name){
+				console.log("hello "+name);
+			}
+
+		}
+	});
+//v-text 和 {{}} 效果一样，v-html,v-bind 在04的时候演示过了
+
+</script>
+</body>
+</html>
+
